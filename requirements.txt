@@ -1,0 +1,19 @@
+# ===== Core =====
+open_clip_torch==3.3.0
+timm==1.0.25
+
+# ===== Data/Utils =====
+numpy
+pillow
+requests
+
+# ===== Vector DB (REST used, but keep client optional) =====
+qdrant-client==1.17.0
+
+# ===== API =====
+fastapi==0.134.0
+uvicorn[standard]==0.41.0
+python-multipart
+
+# ===== UI =====
+streamlit==1.54.0
