@@ -1,0 +1,20 @@
+# data / artifacts
+data/
+artifacts/
+archive/
+
+# docs temp
+*.docx
+~$*.docx
+
+# python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+.env
+
+# os/editor
+.DS_Store
+.vscode/
+.idea/
