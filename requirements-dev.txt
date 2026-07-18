@@ -1,0 +1,7 @@
+-r requirements.txt
+pandas
+scikit-learn
+scipy
+tqdm
+opencv-python
+PyYAML

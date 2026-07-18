@@ -1,0 +1,46 @@
+services:
+  lumos-qdrant:
+    image: qdrant/qdrant:latest
+    container_name: lumos-qdrant
+    ports:
+      - "6334:6333"
+    volumes:
+      - lumos_qdrant_data:/qdrant/storage
+    restart: unless-stopped
+
+  lumos-api:
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+    container_name: lumos-api
+    environment:
+      QDRANT_URL: "http://lumos-qdrant:6333"
+      QDRANT_COLLECTION: "flickr8k_images"
+      IMAGES_DIR: "/app/data/flickr8k/images"
+      MODEL_NAME: "ViT-B-32"
+      MODEL_PRETRAINED: "openai"
+      DEVICE: "cpu"   # optional: "cuda" (if GPU passthrough is configured in Docker)
+      HF_HUB_DISABLE_SYMLINKS_WARNING: "1"
+    ports:
+      - "8008:8000"
+    volumes:
+      - ./data/flickr8k/images:/app/data/flickr8k/images:ro
+    depends_on:
+      - lumos-qdrant
+    restart: unless-stopped
+
+  lumos-ui:
+    build:
+      context: .
+      dockerfile: docker/ui/Dockerfile
+    container_name: lumos-ui
+    environment:
+      API_URL: "http://lumos-api:8000"
+    ports:
+      - "8508:8501"
+    depends_on:
+      - lumos-api
+    restart: unless-stopped
+
+volumes:
+  lumos_qdrant_data:

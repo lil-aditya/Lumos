@@ -1,0 +1,8 @@
+data/
+artifacts/
+archive/
+notebooks/
+.git/
+__pycache__/
+.ipynb_checkpoints/
+*.docx
