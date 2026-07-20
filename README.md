@@ -326,6 +326,3 @@ lumos/
 
 ---
 
-## License
-
-MIT — see [LICENSE](LICENSE).
